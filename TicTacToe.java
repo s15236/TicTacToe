@@ -18,6 +18,24 @@ public class TicTacToe {
             Arrays.fill(board[i], '_');
         }
         printBoard(board);
+
+        /*
+         * Populating the board
+         */
+        for (int i = 0; i < 9; i++) {
+            if (i % 2 == 0) {
+                System.out.println("Turn: " + 'X');
+                int[] spot = askUser(board);
+                board[spot[0]][spot[1]] = 'X';
+                printBoard(board);
+            } else {
+                System.out.println("Turn: " + 'O');
+                int[] spot = askUser(board);
+                board[spot[0]][spot[1]] = 'O';
+                printBoard(board);
+            }
+        }
+
         scan.close();
     }
 
@@ -26,7 +44,6 @@ public class TicTacToe {
      * Function name - printBoard()
      *
      * @param board (char[][])
-     *              <p>
      *              Inside the function:
      *              1. print a new line.
      *              2. print the board.
@@ -43,5 +60,30 @@ public class TicTacToe {
             }
             System.out.println("\n");
         }
+    }
+
+    /**
+     * Function name – askUser
+     *
+     * @param board (char[][] board)
+     * @return spot (int[])
+     *
+     *      Inside the function
+     *      1. Asks the user: - pick a row and column number:
+     *      2.(ignore till task5) Check if the spot is taken. If so, let the user choose again.
+     *      3. Return the row and column in an int[] array.
+     */
+    public static int[] askUser(char[][] board) {
+        System.out.print(" - pick a row and column number: ");
+        int row = scan.nextInt();
+        int column = scan.nextInt();
+
+        while (board[row][column] != '_') {
+            System.out.print("Spot taken, try again: ");
+            row = scan.nextInt();
+            column = scan.nextInt();
+        }
+
+        return new int[]{row, column};
     }
 }
